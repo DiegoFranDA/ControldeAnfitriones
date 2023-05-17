@@ -1,0 +1,60 @@
+{% extends 'anfitriones/base.html' %}
+
+{% block title %} Agregar anfitrion {% endblock %}
+
+{% block content %}
+<div class=" max-w-md mx-auto ">
+  <h1 class="mb-6 text-3xl">Agregar anfitrion</h1>
+    <form method="post">
+      {% csrf_token %}
+        <div class="mb-3">
+          <label class="inline-block mb-2">Grado: *</label><br>
+          {{ form.grado }}
+        </div>
+        <div class="mb-3">
+          <label class="inline-block mb-2">Nombre: *</label><br>
+          {{ form.nombre }}
+        </div>
+        <div class="mb-3">
+          <label class="inline-block mb-2">Apellido paterno: *</label><br>
+          {{ form.paterno }}
+        </div>
+        <div class="mb-3">
+          <label class="inline-block mb-2">Apellido materno: * </label><br>
+          {{ form.materno }}
+        </div>
+        <div class="mb-3">
+          <label class="inline-block mb-2">Cargo: *</label><br>
+          {{ form.cargo }}
+        </div>
+        <div class="mb-3">
+          <label class="inline-block mb-2">Dependencia: *</label><br>
+          {{ form.dependencia }}
+        </div>
+        <div class="mb-3">
+          <label class="inline-block mb-2">Telefono: *</label><br>
+          {{ form.telefono }}
+        </div>
+        <div class="mb-3">
+          <label class="inline-block mb-2">Email: *</label><br>
+          {{ form.email }}
+        </div>
+        <div class="mb-3">
+          <label class="inline-block mb-2">Extension: *</label><br>
+          {{ form.extension }}
+        </div>
+        <p class="mb-6">Los campos con un * son de caracter obligatorio</p>
+        <div class="flex justify-center">
+            <button type="submit" class="bg-teal-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Agregar Anfitrión</button>
+        </div>
+    </form>
+</div>
+{% if form.errors or form.non_field_errors %}
+  <div class="mb-3 p-6 bg-red-100 rounded-xl">
+    {% for field in form %}
+      {{ field.errors }}
+    {% endfor %}
+    {{ form.non_field_errors }}
+  </div>
+{% endif %}
+{% endblock %}

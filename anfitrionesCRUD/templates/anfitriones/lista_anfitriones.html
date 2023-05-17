@@ -1,0 +1,41 @@
+{% extends 'anfitriones/base.html' %}
+
+{% block title %} Listado de anfitriones {% endblock %}
+
+{% block content %}
+
+<table class="table-auto w-full">
+  <thead>
+    <tr class="text-lg bg-gray-200">
+      <th class="px-4 py-2">ID</th>
+      <th class="px-4 py-2">Nombre</th>
+      <th class="px-4 py-2">Correo Electrónico</th>
+      <th class="px-4 py-2">Cargo</th>
+      <th class="px-4 py-2">Dependencia</th>
+      <th class="px-4 py-2">Telefono</th>
+      <th class="px-4 py-2">Eliminar</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for anfitrion in anfitriones %}
+      <tr>
+        <td class="border px-4 py-2">{{ anfitrion.idAnfitrion }}</td>
+        <td class="border px-4 py-2"><a href="{% url 'anfitrionesCRUD:modificar' anfitrion.idAnfitrion %}">
+          <span class="border-b-2 border-teal-500">{{ anfitrion.nombre }}</span></a></td>
+        <td class="border px-4 py-2">{{ anfitrion.email }}</td>
+        <td class="border px-4 py-2">{{ anfitrion.cargo }}</td>
+        <td class="border px-4 py-2">{{ anfitrion.dependencia }}</td>
+        <td class="border px-4 py-2">{{ anfitrion.telefono }}</td>
+        <td class="border px-4 py-2">
+          <form method="post" action="{% url 'anfitrionesCRUD:eliminar' anfitrion.idAnfitrion %}" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este anfitrión?')">
+            {% csrf_token %}
+            <button type="submit"><span class="border-b-2 border-red-500">Eliminar</span></button>
+          </form>
+        </td>
+        <!-- Agrega más columnas según tus necesidades -->
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
