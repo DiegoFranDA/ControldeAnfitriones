@@ -14,7 +14,7 @@ def agregar_anfitrion(request):
             form.save()
             # notificacion
             messages.success(request, 'Anfitrión agregado exitosamente.')
-            return redirect('/')
+            return redirect('anfitrionesCRUD:lista_anfitriones')
 
     else:
         form = AnfitrionForm()
@@ -28,7 +28,7 @@ def modificar_anfitrion(request, anfitrion_id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Información del anfitrión actualizada.')
-            return redirect('/')
+            return redirect('anfitrionesCRUD:lista_anfitriones')
     else:
         form = AnfitrionForm(instance=anfitrion)
 
